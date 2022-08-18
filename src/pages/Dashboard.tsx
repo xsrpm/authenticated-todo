@@ -14,9 +14,10 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { mainListItems} from './listItems';
+import { mainListItems} from '../components/listItems';
 import Button  from '@mui/material/Button';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Link as RouterLink, useNavigate} from "react-router-dom";
 
 function Copyright(props: any) {
   return (
@@ -82,6 +83,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 function DashboardContent() {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -119,7 +121,9 @@ function DashboardContent() {
             <Button color="inherit" sx={{
               display: 'flex',
               gap: '8px',
-            }}>
+            }}
+            onClick={()=>navigate("/signin")}
+            >
                 Logout <LogoutIcon />
             </Button>
           </Toolbar>
