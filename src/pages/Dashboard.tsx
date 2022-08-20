@@ -17,7 +17,12 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems} from '../components/listItems';
 import Button  from '@mui/material/Button';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Link as RouterLink, useNavigate} from "react-router-dom";
+import {  useNavigate} from "react-router-dom";
+import { useAuth } from '../auth/useAuth';
+import { AccountCircle } from '@mui/icons-material';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import { Avatar } from '@mui/material';
 
 function Copyright(props: any) {
   return (
@@ -83,11 +88,25 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 function DashboardContent() {
+  const auth = useAuth()
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = ()=>{
+    auth.signOut(()=>{ 
+      navigate("/")
+    }) 
+  }
 
   return (
       <Box sx={{ display: 'flex' }}>
@@ -118,14 +137,61 @@ function DashboardContent() {
             >
               Dashboard
             </Typography>
+            {
+              /**
+                           <Box sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              }}>
+              <Typography>{ auth.user?.email} </Typography>
             <Button color="inherit" sx={{
               display: 'flex',
               gap: '8px',
             }}
-            onClick={()=>navigate("/signin")}
+            onClick={()=>{
+              auth.signOut(()=>{
+                navigate("/")
+              })
+            }}
             >
                 Logout <LogoutIcon />
             </Button>
+            </Box>
+               */
+            }
+
+            <Box>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <Avatar alt={auth.user.email} src="/broken-image.jpg"/>
+              </IconButton>
+              
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem>{ auth.user?.email}</MenuItem>
+                <MenuItem onClick={handleLogout }>Logout</MenuItem>
+              </Menu>
+            </Box>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

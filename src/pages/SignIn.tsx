@@ -1,19 +1,21 @@
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { Link as RouterLink} from "react-router-dom";
+import { Link as RouterLink, useNavigate} from "react-router-dom";
 import {  Field, Form, Formik } from "formik";
 import { TextField} from "formik-mui";
 import * as Yup from "yup";
+import { useAuth } from '../auth/useAuth';
+
 
 export function SignIn(){
+    const navigate = useNavigate()
+    const auth = useAuth()
     return(
         <Grid container  sx={{ height: '100vh' }}>
             <Grid
@@ -56,11 +58,12 @@ export function SignIn(){
               email: Yup.string().email("Invalid email address").required("Required"),
               password: Yup.string().required("Required")
             })}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
+            onSubmit={async (values, { setSubmitting }) => {
+                // alert(JSON.stringify(values, null, 2));
+                await auth.signIn(values,()=>{
+                    // setSubmitting(false);
+                    navigate("/")
+                })
             }}
           >
                 <Box component={Form} noValidate sx={{ mt: 1 }}>
