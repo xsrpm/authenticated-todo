@@ -13,7 +13,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {  useNavigate} from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { Avatar } from '@mui/material';
+import Tooltip  from '@mui/material/Tooltip';
+import Avatar from '@mui/material/Avatar';
 import { useAuth } from '../components/Auth/AuthContext';
 import { DrawerMenu } from '../components/Menu/DrawerMenu';
 import md5 from 'md5'
@@ -107,6 +108,7 @@ function DashboardContent() {
               Dashboard
             </Typography>
             <Box>
+            <Tooltip title={auth.user.email} placement="left">
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -115,9 +117,9 @@ function DashboardContent() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <Avatar alt={auth.user.email} src={`https://s.gravatar.com/avatar/${md5(auth.user.email)}`}/>
+                <Avatar alt={auth.user.email} src={`https://s.gravatar.com/avatar/${md5(auth.user.email)}`} />
               </IconButton>
-              
+              </Tooltip>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -133,7 +135,6 @@ function DashboardContent() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem>{ auth.user?.email}</MenuItem>
                 <MenuItem onClick={handleLogout }>Logout</MenuItem>
               </Menu>
             </Box>
