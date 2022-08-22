@@ -16,6 +16,7 @@ import Menu from '@mui/material/Menu';
 import { Avatar } from '@mui/material';
 import { useAuth } from '../components/Auth/AuthContext';
 import { DrawerMenu } from '../components/Menu/DrawerMenu';
+import md5 from 'md5'
 
 function Copyright(props: any) {
   return (
@@ -105,30 +106,6 @@ function DashboardContent() {
             >
               Dashboard
             </Typography>
-            {
-              /**
-                           <Box sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              }}>
-              <Typography>{ auth.user?.email} </Typography>
-            <Button color="inherit" sx={{
-              display: 'flex',
-              gap: '8px',
-            }}
-            onClick={()=>{
-              auth.signOut(()=>{
-                navigate("/")
-              })
-            }}
-            >
-                Logout <LogoutIcon />
-            </Button>
-            </Box>
-               */
-            }
-
             <Box>
               <IconButton
                 size="large"
@@ -138,7 +115,7 @@ function DashboardContent() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <Avatar alt={auth.user.email} src="/broken-image.jpg"/>
+                <Avatar alt={auth.user.email} src={`https://s.gravatar.com/avatar/${md5(auth.user.email)}`}/>
               </IconButton>
               
               <Menu

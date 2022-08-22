@@ -16,12 +16,14 @@
     "@supabase/supabase-js": "1.35.6",
     "formik": "2.2.9",
     "formik-mui": "5.0.0-alpha.0",
+    "md5": "2.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.3.0",
     "yup": "0.32.11"
   },
   "devDependencies": {
+    "@types/md5": "2.3.2",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
     "@vitejs/plugin-react": "2.0.1",
