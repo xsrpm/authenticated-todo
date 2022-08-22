@@ -1,18 +1,30 @@
 import * as React from 'react';
-import { supabase } from '../backend/supabase';
-import { AuthContext } from './AuthContext';
 
+import { supabase } from '../../backend/supabase';
+
+
+type AuthContextType =  {
+  user: any,
+  signIn: (user: User, callback: VoidFunction) => void,
+  signOut: (callback: VoidFunction) => void,
+  signUp: (user: User, callback: VoidFunction) => void,
+}
+
+type User = {
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
+}
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  // let [user, setUser] = React.useState<User | null>(null);
-
   let signIn = async ({email,password}: User, callback: VoidFunction) => {
     const { user, session, error } = await supabase.auth.signIn({
       email,
       password
     })
-    console.log("user ", user)
-    console.log("session ", session)
+    // console.log("user ", user)
+    // console.log("session ", session)
     if(user){
       // setUser({ email, password })
       callback();
@@ -43,8 +55,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         },
       }
     )
-    console.log("user ", user)
-    console.log("session ", session)
+    // console.log("user ", user)
+    // console.log("session ", session)
     if(user){
       //setUser({email,password,firstName,lastName});
       callback();
@@ -54,23 +66,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   let user = supabase.auth.user();
 
-
-
   let value = { user, signIn, signOut, signUp };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export interface AuthContextType {
-  user: any,
-  signIn: (user: User, callback: VoidFunction) => void,
-  signOut: (callback: VoidFunction) => void,
-  signUp: (user: User, callback: VoidFunction) => void,
-}
+let AuthContext = React.createContext<AuthContextType>(null!);
 
-export type User = {
-  email: string;
-  password: string;
-  firstName?: string;
-  lastName?: string;
-}
+export function useAuth() {
+    return React.useContext(AuthContext);
+  }
+  

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import { AuthProvider } from './auth/AuthProvider';
-import RequireAuth from './auth/RequireAuth';
-import RequireNoAuth from './auth/RequireNoAuth';
+import { AuthProvider } from './components/Auth/AuthContext';
+import RequireAuth from './components/Auth/RequireAuth';
+import RequireNoAuth from './components/Auth/RequireNoAuth';
 import { Dashboard } from './pages/Dashboard'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
@@ -17,7 +17,6 @@ function App() {
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       </AuthProvider>
-
     </div>
   )
 }

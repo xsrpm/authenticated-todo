@@ -11,7 +11,7 @@ import Container from '@mui/material/Container';
 import {  Field, Form, Formik } from "formik";
 import { TextField} from "formik-mui";
 import * as Yup from "yup";
-import { useAuth } from '../auth/useAuth';
+import { useAuth } from '../components/Auth/AuthContext';
 import {  useNavigate} from "react-router-dom";
 
   export function SignUp() {
