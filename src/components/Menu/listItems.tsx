@@ -11,7 +11,7 @@ export const mainListItems = (
       <ListItemIcon>
         <TaskIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="TO-DO" />
     </ListItemButton>
   </React.Fragment>
 );

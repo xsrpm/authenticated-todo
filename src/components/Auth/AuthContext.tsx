@@ -4,7 +4,7 @@ import { supabase } from '../../backend/supabase';
 
 
 type AuthContextType =  {
-  user: any,
+  getUser: ()=>any,
   signIn: (user: User, callback: VoidFunction) => void,
   signOut: (callback: VoidFunction) => void,
   signUp: (user: User, callback: VoidFunction) => void,
@@ -64,9 +64,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     else console.log(error)  
   }
 
-  let user = supabase.auth.user();
+  let getUser = ()=> supabase.auth.user();
 
-  let value = { user, signIn, signOut, signUp };
+  let value = { getUser, signIn, signOut, signUp };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
