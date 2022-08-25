@@ -65,35 +65,35 @@ function DashboardContent() {
   }
 
   return (
-      <Box sx={{ display: 'flex' }}>
-        <AppBar position="absolute" open={open}>
-          <Toolbar
+    <Box sx={{ display: "flex" }}>
+      <AppBar position="absolute" open={open}>
+        <Toolbar
+          sx={{
+            pr: "24px", // keep right padding when drawer closed
+          }}
+        >
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={toggleDrawer}
             sx={{
-              pr: '24px', // keep right padding when drawer closed
+              marginRight: "36px",
+              ...(open && { display: "none" }),
             }}
           >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Authentication TO-DO
-            </Typography>
-            <Box>
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1 }}
+          >
+            Authenticated TO-DO List
+          </Typography>
+          <Box>
             <Tooltip title={user.email} placement="left">
               <IconButton
                 size="large"
@@ -103,48 +103,55 @@ function DashboardContent() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <Avatar alt={user.email} src={`https://s.gravatar.com/avatar/${md5(user.email)}`} />
+                <Avatar
+                  alt={user.email}
+                  src={`https://s.gravatar.com/avatar/${md5(user.email)}`}
+                />
               </IconButton>
-              </Tooltip>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleLogout }>Logout</MenuItem>
-              </Menu>
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <DrawerMenu open={open} toggleDrawer={toggleDrawer} drawerWidth={drawerWidth} />
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-            display: 'grid',
-            gridTemplateRows: "auto 1fr"
-          }}
-        >
-          <Toolbar />
-          <TodoComponent />
-        </Box>
+            </Tooltip>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <DrawerMenu
+        open={open}
+        toggleDrawer={toggleDrawer}
+        drawerWidth={drawerWidth}
+      />
+      <Box
+        component="main"
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === "light"
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900],
+          flexGrow: 1,
+          height: "100vh",
+          overflow: "auto",
+          display: "grid",
+          gridTemplateRows: "auto 1fr",
+        }}
+      >
+        <Toolbar />
+        <TodoComponent />
       </Box>
+    </Box>
   );
 }
 
