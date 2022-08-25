@@ -1,4 +1,4 @@
-import { Task } from "./TaskContext";
+import { UpdateTask, Task, useTasks } from "./TaskContext";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import {
@@ -15,10 +15,16 @@ type Props = {
 };
 
 export function TaskCard({ task }: Props) {
+  const { deleteTask, updateTask } = useTasks();
   const [checked, setChecked] = useState(task.done);
   const handleChangeCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
+    updateTask(task.id, { done: !checked });
   };
+  const handleClickDelete = () => {
+    deleteTask(task.id);
+  };
+
   return (
     <Unstable_Grid2 container component="article" sx={{ width: "100%" }}>
       <Unstable_Grid2 xs={11}>
@@ -28,7 +34,7 @@ export function TaskCard({ task }: Props) {
         />
       </Unstable_Grid2>
       <Unstable_Grid2 xs={1}>
-        <Button>
+        <Button onClick={handleClickDelete}>
           <DeleteIcon color="secondary" />
         </Button>
       </Unstable_Grid2>
