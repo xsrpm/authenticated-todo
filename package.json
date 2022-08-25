@@ -1,5 +1,5 @@
 {
-  "name": "authentication-todo",
+  "name": "authenticated-todo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
