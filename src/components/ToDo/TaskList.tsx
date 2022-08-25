@@ -1,19 +1,23 @@
 import { useTasks } from './TaskContext'
-import {useEffect, useMemo} from 'react'
-import { TaskCard } from './TaskCard'
+import { useEffect } from "react";
+import { TaskCard } from "./TaskCard";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 
-export function TaskList(){
-    const {tasks, getTasks } = useTasks()
-    useEffect(()=>{
-        getTasks()
-    },[])
-    return (
-        <ul>
-            {
-                tasks.map((task)=>{
-                    return <li key={task.id}><TaskCard task={task}/></li>
-                })
-            }
-        </ul>
-    )
+export function TaskList() {
+  const { tasks, getTasks } = useTasks();
+  useEffect(() => {
+    getTasks();
+  }, []);
+  return (
+    <List sx={{ display: "flex", flexDirection: "column" }}>
+      {tasks.map((task) => {
+        return (
+          <ListItem key={task.id}>
+            <TaskCard task={task} />
+          </ListItem>
+        );
+      })}
+    </List>
+  );
 }

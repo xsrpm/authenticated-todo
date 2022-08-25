@@ -45,7 +45,11 @@ export const  TaskProvider = ({ children }: Props)=>{
     const deleteTask = ()=>{}
     const getTasks = async ()=>{
         try {
-            const { error, data } =  await supabase.from('tasks').select().eq("userId", user?.id)
+            const { error, data } = await supabase
+              .from("tasks")
+              .select()
+              .eq("userId", user?.id)
+              .order("id");
             if (error) throw error;
             console.log('getTasks',data)
             setTasks(data)
