@@ -47,13 +47,9 @@ export function AddButton(){
                 taskName: ""
               }}
               onSubmit={async (values, { setSubmitting }) => {
-                  alert(JSON.stringify(values, null, 2));
+                  // alert(JSON.stringify(values, null, 2));
                   taskContext?.addNewTask(values.taskName)
                   setOpenDialog(false)
-                  //await auth.signIn(values,()=>{
-                      // setSubmitting(false);
-                    //  navigate("/")
-                  //})
               }}
               >
             <Box component={Form} noValidate sx={{ mt: 1 }}>

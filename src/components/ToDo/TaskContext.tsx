@@ -1,7 +1,7 @@
 import {useState, createContext, useContext} from 'react'
 import { supabase } from '../../backend/supabase'
 
-type Task = {
+export type Task = {
     created_at: string,
     name:"string",
     id: number,
@@ -28,9 +28,17 @@ export const  TaskProvider = ({ children }: Props)=>{
     const [tasks, setTasks] = useState<Array<Task>>([])
     const user = supabase.auth.user()
     const addNewTask = async (taskName: string)=>{
-        const result = await supabase.from('tasks').insert({name:taskName, userId: user?.id})
-        console.log(result)
-        getTasks()
+        try {
+            const result = await supabase.from('tasks').insert({name:taskName, userId: user?.id})
+            if(result.error) throw result.error
+            setTasks([
+                ...tasks,
+                result.data[0]
+            ])
+            console.log('addNewTask',result.data[0])
+        } catch (error) {
+            alert(error)
+        }
     }
     const checkTask = ()=>{}
     const updateTask = ()=>{}
@@ -39,7 +47,7 @@ export const  TaskProvider = ({ children }: Props)=>{
         try {
             const { error, data } =  await supabase.from('tasks').select().eq("userId", user?.id)
             if (error) throw error;
-            console.log(data)
+            console.log('getTasks',data)
             setTasks(data)
         }
         catch (error) {
@@ -56,7 +64,7 @@ export const  TaskProvider = ({ children }: Props)=>{
 
 export function useTasks(){
     const context = useContext(TaskContext);
-    console.log(context)
+    // console.log('context', context)
     if (context === undefined) {
       throw new Error("useTasks must be used within a TaskProvider");
     }
