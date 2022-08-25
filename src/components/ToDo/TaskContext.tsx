@@ -47,7 +47,7 @@ export const TaskProvider = ({ children }: Props) => {
         .insert({ name: taskName, userId: user?.id });
       if (result.error) throw result.error;
       setTasks([...tasks, result.data[0]]);
-      console.log("addNewTask", result.data[0]);
+      //console.log("addNewTask", result.data[0]);
     } catch (error) {
       alert(error);
     }
@@ -61,7 +61,7 @@ export const TaskProvider = ({ children }: Props) => {
         .eq("userId", user?.id)
         .eq("id", taskId);
       if (error) throw error;
-      console.log("updateTask", data);
+      //console.log("updateTask", data);
     } catch (error) {
       alert(error);
     }
@@ -76,7 +76,7 @@ export const TaskProvider = ({ children }: Props) => {
         .eq("id", taskId);
       if (error) throw error;
       setTasks(tasks.filter((task) => task.id !== taskId));
-      console.log("deleteTask", data);
+      //console.log("deleteTask", data);
     } catch (error) {
       alert(error);
     }
@@ -89,7 +89,7 @@ export const TaskProvider = ({ children }: Props) => {
         .eq("userId", user?.id)
         .order("id");
       if (error) throw error;
-      console.log("getTasks", data);
+      //console.log("getTasks", data);
       setTasks(data);
     } catch (error) {
       alert({ error });

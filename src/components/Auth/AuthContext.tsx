@@ -3,13 +3,13 @@ import * as React from "react";
 import { supabase } from "../../backend/supabase";
 
 type ResponseSignIn = {
-  data: User;
-  messageError: string;
+  data?: any;
+  messageError?: string;
 };
 
 type AuthContextType = {
   getUser: () => any;
-  signIn: (user: User) => ResponseSignIn;
+  signIn: (user: User) => Promise<ResponseSignIn>;
   signOut: (callback: VoidFunction) => void;
   signUp: (user: User, callback: VoidFunction) => void;
 };
@@ -27,7 +27,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       email,
       password,
     });
-    console.log(user, error);
+    // console.log(user, error);
     return { data: user, messageError: error?.message };
   };
 
