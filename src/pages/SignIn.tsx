@@ -60,10 +60,12 @@ export function SignIn(){
             })}
             onSubmit={async (values, { setSubmitting }) => {
                 // alert(JSON.stringify(values, null, 2));
-                await auth.signIn(values,()=>{
-                    // setSubmitting(false);
-                    navigate("/")
-                })
+                const { data, messageError } = await auth.signIn(values);
+                if (data) navigate("/");
+                else {
+                  console.error(messageError);
+                  alert(messageError);
+                } 
             }}
           >
                 <Box component={Form} noValidate sx={{ mt: 1 }}>
