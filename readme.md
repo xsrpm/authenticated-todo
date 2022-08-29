@@ -1,16 +1,16 @@
-Authenticated To-Do
-# The Challenge
+# Authenticated To-Do
+## The Challenge
 Build an authenticated To-DO list (independent for each user) using supabase as backend and MUI as component library.
 
-# Screenshot
-## To-Do
+## Screenshot
+### To-Do
 ![To-Do](./docs/dashboard.png)
-## Sign In
+### Sign In
 ![SignIN](./docs/signin.png)
-## Sign Up
+### Sign Up
 ![SignUp](./docs/signup.png)
 
-# Built with
+## Built with
 - React
 - MUI (Component library)
 - React Router
@@ -22,6 +22,6 @@ Build an authenticated To-DO list (independent for each user) using supabase as 
 - TS-Standard
 - Vite
 
-# Links
+## Links
 - [React y Supabase, Aplicacion completa - Auth y CRUD](https://www.youtube.com/watch?v=I1zzgAfSUBQ)
 - [MUI](https://mui.com/)
