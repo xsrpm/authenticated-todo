@@ -31,6 +31,13 @@ export function TaskCard({ task }: Props) {
         <FormControlLabel
           label={task.name}
           control={<Checkbox checked={checked} onChange={handleChangeCheck} />}
+          sx={
+            checked
+              ? {
+                  textDecoration: "line-through",
+                }
+              : {}
+          }
         />
       </Unstable_Grid2>
       <Unstable_Grid2 xs={1}>
