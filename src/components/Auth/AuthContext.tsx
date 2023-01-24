@@ -12,7 +12,8 @@ type AuthContextType = {
   signIn: (user: User) => Promise<ResponseSignIn>;
   signOut: (callback: VoidFunction) => void;
   signUp: (user: User, callback: VoidFunction) => void;
-  resetPasswordForEmail: (email: string) => void
+  resetPasswordForEmail: (email: string) => void;
+  updatePassword: (password: string) => void
 };
 
 type User = {
@@ -23,6 +24,7 @@ type User = {
 };
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+
   let signIn = async ({ email, password }: User) => {
     const { user, session, error } = await supabase.auth.signIn({
       email,
@@ -65,17 +67,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   let resetPasswordForEmail = async (email: string)=> {
+    const regex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^\/\n]+)/i
+    const redirectUrl = `${( window.location.toString().match(regex) as Array<string>)[0]}/update-password`
     let { data, error } = await supabase.auth.api.resetPasswordForEmail(email,
-      { redirectTo: `${window.location}/update-password` })
+      { redirectTo: redirectUrl })
     if(data){
-      console.log(`sending reset password a ${window.location}`)
+      console.log(`redirect url ${redirectUrl}`)
     }
     else console.log(error)
   }
 
   let getUser = () => supabase.auth.user();
 
-  let value: AuthContextType = { getUser, signIn, signOut, signUp, resetPasswordForEmail };
+  let updatePassword = async (password: string)=> {
+    const { user, error } = await supabase.auth.update({password})
+    if(user){
+      console.log(user)
+    }
+    else console.log(error)
+  }
+
+  let value: AuthContextType = { getUser, signIn, signOut, signUp, resetPasswordForEmail, updatePassword };
 
   supabase.auth.onAuthStateChange((event : string, session: any) => {
     console.log(event, session)

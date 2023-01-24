@@ -42,7 +42,8 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 
-function DashboardContent() {
+
+export function Dashboard({ children }: { children: React.ReactNode }) {
   const {getUser, signOut} = useAuth()
   const user = getUser()
   const navigate = useNavigate();
@@ -63,6 +64,8 @@ function DashboardContent() {
       navigate("/")
     }) 
   }
+
+  if(!user) return <h1>Loading</h1> 
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -149,12 +152,8 @@ function DashboardContent() {
         }}
       >
         <Toolbar />
-        <TodoComponent />
+        { children}
       </Box>
     </Box>
   );
-}
-
-export function Dashboard() {
-  return <DashboardContent />;
 }
