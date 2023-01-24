@@ -27,3 +27,5 @@ Build an authenticated To-DO list (independent for each user) using supabase as 
 - [MUI](https://mui.com/)
 - https://supabase.com/docs/reference/javascript/typescript-support
 - https://supabase.com/docs/guides/auth/overview
+- https://medium.com/today-i-solved/deploy-spa-with-react-router-to-vercel-d10a6b2bfde8
+- https://vercel.com/docs/project-configuration
