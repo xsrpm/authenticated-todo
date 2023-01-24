@@ -95,8 +95,8 @@ export function SignIn(){
                 </Button>
                 <Grid container>
                     <Grid item xs>
-                        <Link href="/reset-password" variant="body2">
-                        Forgot password?
+                        <Link to="/reset-password" variant="body2" component={RouterLink}>
+                        {"Forgot password?"}
                         </Link>
                     </Grid>
                     <Grid item>
