@@ -25,3 +25,5 @@ Build an authenticated To-DO list (independent for each user) using supabase as 
 ## Links
 - [React y Supabase, Aplicacion completa - Auth y CRUD](https://www.youtube.com/watch?v=I1zzgAfSUBQ)
 - [MUI](https://mui.com/)
+- https://supabase.com/docs/reference/javascript/typescript-support
+- https://supabase.com/docs/guides/auth/overview

@@ -12,6 +12,7 @@ type AuthContextType = {
   signIn: (user: User) => Promise<ResponseSignIn>;
   signOut: (callback: VoidFunction) => void;
   signUp: (user: User, callback: VoidFunction) => void;
+  resetPasswordForEmail: (email: string) => void
 };
 
 type User = {
@@ -63,9 +64,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } else console.log(error);
   };
 
+  let resetPasswordForEmail = async (email: string)=> {
+    let { data, error } = supabase.auth.api.resetPasswordForEmail(email,
+      { redirectTo: `${window.location}/update-password` })
+    if(data){
+      console.log(`sending reset password a ${window.location}`)
+    }
+    else console.log(error)
+  }
+
   let getUser = () => supabase.auth.user();
 
-  let value = { getUser, signIn, signOut, signUp };
+  let value: AuthContextType = { getUser, signIn, signOut, signUp, resetPasswordForEmail };
+
+  supabase.auth.onAuthStateChange((event : string, session: any) => {
+    console.log(event, session)
+  })
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "supabase":"supabase"
   },
   "dependencies": {
     "@emotion/react": "11.10.0",
@@ -23,11 +24,13 @@
     "yup": "0.32.11"
   },
   "devDependencies": {
-    "ts-standard": "11.0.0",
     "@types/md5": "2.3.2",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
+    "@types/react-router-dom": "5.3.3",
     "@vitejs/plugin-react": "2.0.1",
+    "supabase": "1.34.5",
+    "ts-standard": "11.0.0",
     "typescript": "4.6.4",
     "vite": "3.0.7"
   },
