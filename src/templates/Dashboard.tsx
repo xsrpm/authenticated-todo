@@ -65,8 +65,6 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
     }) 
   }
 
-  if(!user) return <h1>Loading</h1> 
-
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position="absolute" open={open}>

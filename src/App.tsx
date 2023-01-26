@@ -8,6 +8,7 @@ import { ResetPassword } from './pages/ResetPassword';
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 import { UpdatePassword } from './pages/UpdatePassword';
+import { RequireRevalidate } from './components/Auth/RequireRevalidate';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/signin" element={<RequireNoAuth><SignIn /></RequireNoAuth>} />
         <Route path="/signup" element={<RequireNoAuth><SignUp /></RequireNoAuth>} />
         <Route path="/reset-password" element={<RequireNoAuth><ResetPassword/></RequireNoAuth>} />
-        <Route path="/update-password" element={<Dashboard ><UpdatePassword/></Dashboard>} />
+        <Route path="/update-password" element={<RequireRevalidate><Dashboard ><UpdatePassword/></Dashboard></RequireRevalidate>} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       </AuthProvider>
