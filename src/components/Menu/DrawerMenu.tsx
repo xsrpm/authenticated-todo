@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import { mainListItems } from './listItems';
+import { MainListItems } from './MainListItems';
 
   type Props = {
     open: boolean,
@@ -55,7 +55,7 @@ import { mainListItems } from './listItems';
         </Toolbar>
         <Divider />
         <List component="nav">
-          {mainListItems}
+          <MainListItems />
         </List>
       </Drawer>
     )

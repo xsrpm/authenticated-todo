@@ -5,7 +5,6 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import {  useNavigate} from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
@@ -15,7 +14,7 @@ import Avatar from '@mui/material/Avatar';
 import { useAuth } from '../components/Auth/AuthContext';
 import { DrawerMenu } from '../components/Menu/DrawerMenu';
 import md5 from 'md5'
-import { TodoComponent } from '../components/ToDo/TodoComponent';
+
 
 const drawerWidth: number = 240;
 
@@ -63,6 +62,9 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
     await signOut(()=>{ 
       navigate("/")
     }) 
+  }
+  const handleClickChangePassword = ()=>{
+    navigate("/update-password")
   }
 
   return (
@@ -125,6 +127,7 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              <MenuItem onClick={handleClickChangePassword}>Change Password</MenuItem>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </Box>

@@ -17,9 +17,6 @@ export function ResetPassword(){
       const handleClose = () => {
         setOpen(false);
       };
-    const handleSubmit = (event : React.FormEvent<HTMLFormElement>)=>{
-
-    }
     return (
         <Container maxWidth="xs">
           <Box
